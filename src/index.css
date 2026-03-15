@@ -1,0 +1,122 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(1200px 600px at 10% 10%, #f2e7ff 0%, transparent 60%),
+    radial-gradient(900px 500px at 90% 20%, #c7fff1 0%, transparent 55%),
+    linear-gradient(160deg, #f6f7fb 0%, #eef0f7 100%);
+  font-family: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  color: #0c0f1a;
+}
+
+.containerDiv {
+  width: min(420px, 92vw);
+  background: #111322;
+  border-radius: 24px;
+  padding: 22px;
+  box-shadow:
+    0 24px 60px rgba(6, 12, 44, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.inputDiv {
+  padding: 18px 16px;
+  border-radius: 18px;
+  margin: 8px 4px 18px;
+  background: linear-gradient(140deg, #1f223a, #171a2b);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.inputDiv input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: #f7f8ff;
+  font-size: 32px;
+  font-weight: 600;
+  text-align: right;
+  letter-spacing: 0.02em;
+  outline: none;
+}
+
+.keysContainerDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.keysDiv {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.lastKeys {
+  grid-template-columns: 1fr 1fr 2fr;
+}
+
+button {
+  appearance: none;
+  border: none;
+  border-radius: 16px;
+  padding: 16px 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #f7f8ff;
+  background: linear-gradient(160deg, #2c3252, #1b2038);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease, filter 120ms ease;
+}
+
+.keysDiv button:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.08);
+  
+}
+
+.keysDiv button:active {
+  transform: translateY(1px) scale(0.99);
+  box-shadow:
+    0 6px 12px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+
+
+.operator {
+  background: linear-gradient(140deg, #ffb347, #ff7b52);
+  color: #1a0f0b;
+  background: #49D0DB;
+}
+
+
+
+@media (max-width: 480px) {
+  .containerDiv {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .inputDiv input {
+    font-size: 28px;
+  }
+
+  .keysDiv button {
+    padding: 14px 0;
+  }
+}
