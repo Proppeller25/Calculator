@@ -1,5 +1,6 @@
 const inputElement = document.querySelector('#inputElement')
 const buttons = document.querySelectorAll('button')
+const calculatorArr = []
 
 let currentInputValue = ''
 const checkInput = () => {
@@ -21,8 +22,37 @@ inputElement.addEventListener('keydown', (event) => {
 
 buttons.forEach((button) => {
   button.addEventListener('click', () => {
-    if (!button.classList.contains('operator') && inputElement.value.length < 8)currentInputValue += button.textContent
-    else console.log('This is an operator')
-    inputElement.value = currentInputValue
+    if (!button.classList.contains('operator') && inputElement.value.length < 8) inputElement.value += button.textContent
+    else if (button.classList.contains('operator')) {
+      calculatorArr.push(inputElement.value)
+      calculatorArr.push(button.textContent)
+      console.log('This is an operator', calculatorArr)
+      calculate()
+    }
   })
 })
+
+
+ 
+
+const calculate = () => {
+  let total = 0
+  let operator = null
+
+  calculatorArr.forEach((token, i) => {
+
+    if (isNaN(Number(token))) operator = token
+    else if (!isNaN(Number(token))){
+      if (i < 1) total = Number(token)
+      else {
+       if (operator === '+') total += Number(token)
+       else if (operator === '-') total -= Number(token)
+       else if (operator === '*') total = total * Number(token)
+       else if (operator ==='/') total = total / Number(token) 
+      }
+    }
+    console.log(total)
+  })
+}
+
+
