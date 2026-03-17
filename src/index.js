@@ -1,11 +1,12 @@
 const inputElement = document.querySelector('#inputElement')
 const buttons = document.querySelectorAll('button')
-const calculatorArr = []
+const temporaryResultdiv = document.querySelector('.temporaryResult')
+
+let calculatorArr = []
 
 let currentInputValue = ''
 const checkInput = () => {
   if (inputElement.value.length > 8) {
-    console.log('Exceeded Limit')
     inputElement.value = inputElement.value.slice(0, 8)
   }
    else console.log('Okay')
@@ -24,13 +25,32 @@ buttons.forEach((button) => {
   button.addEventListener('click', () => {
     if (!button.classList.contains('operator') && inputElement.value.length < 8) inputElement.value += button.textContent
     else if (button.classList.contains('operator')) {
-      calculatorArr.push(inputElement.value)
-      calculatorArr.push(button.textContent)
-      console.log('This is an operator', calculatorArr)
-      calculate()
+      if (button.textContent === 'C') {
+        inputElement.value = ''
+        return
+      }
+      else if (button.textContent === 'AC') {
+        calculatorArr = []
+        updateTempDiv()
+      }
+      else if (button.textContent === '=') {
+        calculatorArr.push(inputElement.value)
+        inputElement.value = calculate()
+        temporaryResultdiv.textContent = ''
+        return
+      }
+      else {
+        calculatorArr.push(inputElement.value)
+        calculatorArr.push(button.textContent)
+        inputElement.value = ''
+        updateTempDiv()
+      }  
+      
     }
   })
 })
+
+
 
 
  
@@ -46,13 +66,17 @@ const calculate = () => {
       if (i < 1) total = Number(token)
       else {
        if (operator === '+') total += Number(token)
-       else if (operator === '-') total -= Number(token)
+       else if (operator === '—') total -= Number(token)
        else if (operator === '*') total = total * Number(token)
        else if (operator ==='/') total = total / Number(token) 
       }
     }
-    console.log(total)
   })
+  return total
 }
 
+const updateTempDiv  = () => {
+  temporaryResultdiv.textContent = ''
+  temporaryResultdiv.textContent += calculate()
+}
 

@@ -36,6 +36,7 @@ body {
   margin: 8px 4px 18px;
   background: linear-gradient(140deg, #1f223a, #171a2b);
   border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #f7f8ff;
 }
 
 .inputDiv input {
@@ -49,6 +50,14 @@ body {
   letter-spacing: 0.02em;
   outline: none;
 }
+
+.temporaryResult{
+  text-align: right;
+  color: rgb(209, 231, 249);
+  font-size: 20px;
+  font-weight: 600;
+}
+
 
 .keysContainerDiv {
   display: flex;
