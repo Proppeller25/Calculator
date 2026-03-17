@@ -3,13 +3,16 @@ const buttons = document.querySelectorAll('button')
 const temporaryResultdiv = document.querySelector('.temporaryResult')
 
 let calculatorArr = []
+let today = new Date()
+let storageArr = JSON.parse(localStorage.getItem('previousCalc')) || []
 
-let currentInputValue = ''
+const foundDuplicate = storageArr.find(item => item.date === today.toLocaleDateString())
+
 const checkInput = () => {
   if (inputElement.value.length > 8) {
     inputElement.value = inputElement.value.slice(0, 8)
   }
-   else console.log('Okay')
+   else ''
 }
 
 
@@ -30,13 +33,31 @@ buttons.forEach((button) => {
         return
       }
       else if (button.textContent === 'AC') {
+        inputElement.value = ''
         calculatorArr = []
         updateTempDiv()
       }
       else if (button.textContent === '=') {
         calculatorArr.push(inputElement.value)
+
+        if (!foundDuplicate) {
+          storageArr.push ({
+            date:today.toLocaleDateString(),
+            entries: [{expression: calculatorArr.join(' '), result: calculate(), time: today.toLocaleTimeString()}]
+          })
+          localStorage.setItem('previousCalc', JSON.stringify(storageArr))
+        } else if (foundDuplicate) {
+          console.log(foundDuplicate)
+          foundDuplicate.entries.push({
+            expression: calculatorArr.join(' '), result: calculate(), time: today.toLocaleTimeString()
+          })
+          localStorage.setItem('previousCalc', JSON.stringify(storageArr))
+        }
+
+        localStorage.setItem('previousCalc', JSON.stringify(storageArr))
         inputElement.value = calculate()
         temporaryResultdiv.textContent = ''
+        calculatorArr = []
         return
       }
       else {
@@ -68,7 +89,8 @@ const calculate = () => {
        if (operator === '+') total += Number(token)
        else if (operator === '—') total -= Number(token)
        else if (operator === '*') total = total * Number(token)
-       else if (operator ==='/') total = total / Number(token) 
+       else if (operator ==='/') total = total / Number(token)
+       else if (operator ==='%') total = total * 1/100
       }
     }
   })
@@ -79,4 +101,8 @@ const updateTempDiv  = () => {
   temporaryResultdiv.textContent = ''
   temporaryResultdiv.textContent += calculate()
 }
+
+
+
+console.log(foundDuplicate)
 
