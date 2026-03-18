@@ -113,6 +113,39 @@ button {
   background: #49D0DB;
 }
 
+.historyDiv {
+  color: white;
+  padding: 10px;
+  margin: 1rem auto;
+  max-height: 100px;
+  overflow-y: auto;
+}
+
+
+.historyEntry {
+  margin: 10px;
+}
+
+.historyButton {
+  color: whitesmoke;
+  border: 1px whitesmoke solid;
+  max-width: max-content;
+  padding: 5px;
+  border-radius: 10px;
+  margin: 8px 4px 18px;
+}
+
+.historyButtonDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+  cursor: pointer;
+}
+
+.display {
+  display: none;
+}
 
 
 @media (max-width: 480px) {

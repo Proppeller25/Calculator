@@ -1,6 +1,8 @@
 const inputElement = document.querySelector('#inputElement')
 const buttons = document.querySelectorAll('button')
 const temporaryResultdiv = document.querySelector('.temporaryResult')
+const historyDiv = document.querySelector('.historyDiv')
+const historyButtonDiv = document.querySelector('.historyButtonDiv')
 
 let calculatorArr = []
 let today = new Date()
@@ -46,12 +48,17 @@ buttons.forEach((button) => {
             entries: [{expression: calculatorArr.join(' '), result: calculate(), time: today.toLocaleTimeString()}]
           })
           localStorage.setItem('previousCalc', JSON.stringify(storageArr))
-        } else if (foundDuplicate) {
+          displayHistory()
+        } 
+        else if (foundDuplicate) {
           console.log(foundDuplicate)
           foundDuplicate.entries.push({
-            expression: calculatorArr.join(' '), result: calculate(), time: today.toLocaleTimeString()
+            expression: calculatorArr.join(' '),
+            result: calculate(),
+            time: today.toLocaleTimeString()
           })
           localStorage.setItem('previousCalc', JSON.stringify(storageArr))
+          displayHistory()
         }
 
         localStorage.setItem('previousCalc', JSON.stringify(storageArr))
@@ -65,10 +72,16 @@ buttons.forEach((button) => {
         calculatorArr.push(button.textContent)
         inputElement.value = ''
         updateTempDiv()
+        displayHistory()
       }  
       
     }
   })
+})
+
+historyButtonDiv.addEventListener('click', () => {
+  console.log('history clicked')
+  historyDiv.classList.toggle('display')
 })
 
 
@@ -102,7 +115,24 @@ const updateTempDiv  = () => {
   temporaryResultdiv.textContent += calculate()
 }
 
+const displayHistory = () => {
+  historyDiv.innerHTML = ''
+  if (storageArr.length < 1) historyDiv.innerHTML = `<div>No History</div>` 
+  storageArr.forEach((data) => {
+    let entryHtml = ``
+    data.entries.forEach((entry) => {
+      entryHtml += `<div>${entry.expression} =</div>
+      <div class = 'historyEntry'>${entry.result}</div>`
+    })
 
+    historyDiv.innerHTML += `<div >${data.date}</div>
+      <hr>
+      ${entryHtml}
+      <hr>
+      ` 
+  })
+}
 
+displayHistory()
 console.log(foundDuplicate)
 
