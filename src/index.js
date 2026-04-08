@@ -18,12 +18,7 @@ const checkInput = () => {
 }
 
 
-
-
 inputElement.addEventListener('input', checkInput)
-inputElement.addEventListener('keydown', (event) => {
-  if (isNaN(event.key) &&  event.key !== 'Backspace' && event.key !== 'Delete' && event.key !== 'ArrowLeft' && event.key !== 'ArrowRight' && event.key !== 'Tab' && event.key !== '.') {event.preventDefault(); console.log(event.key)}
-})
 
 
 buttons.forEach((button) => {
@@ -68,7 +63,7 @@ buttons.forEach((button) => {
         return
       }
       else {
-        calculatorArr.push(inputElement.value)
+        calculatorArr.push(Number(inputElement.value))
         calculatorArr.push(button.textContent)
         inputElement.value = ''
         updateTempDiv()
@@ -134,5 +129,4 @@ const displayHistory = () => {
 }
 
 displayHistory()
-console.log(foundDuplicate)
 

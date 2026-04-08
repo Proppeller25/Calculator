@@ -51,6 +51,12 @@ body {
   outline: none;
 }
 
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .temporaryResult{
   text-align: right;
   color: rgb(209, 231, 249);
@@ -147,6 +153,16 @@ button {
   display: none;
 }
 
+.noScrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .noScrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+
+  }
 
 @media (max-width: 480px) {
   .containerDiv {

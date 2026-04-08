@@ -4,16 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calculator</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="/src/index.css">
 </head>
 <body>
   <div class="containerDiv">
-    <div class="historyButtonDiv"><span class="historyButton">History</span></div>
-    <div class="historyDiv display">
+    <div class="historyButtonDiv"><span class="historyButton"><i class="fa-solid fa-clock-rotate-left"></i></span></div>
+    <div class="historyDiv display noScrollbar">
       
     </div>
     <div class="inputDiv">
-      <input id="inputElement" type="text" placeholder="0">
+      <input id="inputElement" type="number" inputmode="numeric" placeholder="0">
       <div class="temporaryResult"></div>
     </div>
 
