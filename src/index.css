@@ -28,6 +28,7 @@ body {
     0 24px 60px rgba(6, 12, 44, 0.35),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
+  height: 100vh
 }
 
 .inputDiv {
@@ -37,6 +38,11 @@ body {
   background: linear-gradient(140deg, #1f223a, #171a2b);
   border: 1px solid rgba(255, 255, 255, 0.08);
   color: #f7f8ff;
+  min-height: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .inputDiv input {
@@ -49,6 +55,7 @@ body {
   text-align: right;
   letter-spacing: 0.02em;
   outline: none;
+  min-height: 100px;
 }
 
 input::-webkit-inner-spin-button,
@@ -62,6 +69,8 @@ input::-webkit-outer-spin-button {
   color: rgb(209, 231, 249);
   font-size: 20px;
   font-weight: 600;
+  text-align: right;
+  width: 100%;
 }
 
 
@@ -76,6 +85,7 @@ input::-webkit-outer-spin-button {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
+  min-height: 100%;
 }
 
 .lastKeys {
@@ -123,7 +133,7 @@ button {
   color: white;
   padding: 10px;
   margin: 1rem auto;
-  max-height: 100px;
+  max-height: 60%;
   overflow-y: auto;
 }
 
@@ -168,6 +178,7 @@ button {
   .containerDiv {
     padding: 18px;
     border-radius: 20px;
+    height: 100vh
   }
 
   .inputDiv input {
@@ -176,5 +187,6 @@ button {
 
   .keysDiv button {
     padding: 14px 0;
+    
   }
 }

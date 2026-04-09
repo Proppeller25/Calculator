@@ -3,6 +3,7 @@ const buttons = document.querySelectorAll('button')
 const temporaryResultdiv = document.querySelector('.temporaryResult')
 const historyDiv = document.querySelector('.historyDiv')
 const historyButtonDiv = document.querySelector('.historyButtonDiv')
+const keysContainer = document.querySelector('.keysContainerDiv')
 
 let calculatorArr = []
 let today = new Date()
@@ -18,7 +19,10 @@ const checkInput = () => {
 }
 
 
+
+
 inputElement.addEventListener('input', checkInput)
+
 
 
 buttons.forEach((button) => {
@@ -77,10 +81,15 @@ buttons.forEach((button) => {
 historyButtonDiv.addEventListener('click', () => {
   console.log('history clicked')
   historyDiv.classList.toggle('display')
+  keysContainer.classList.toggle('display')
 })
 
 
-
+inputElement.addEventListener('keydown', () => {
+  if (historyDiv.classList.contains('display')) return
+  historyDiv.classList.toggle('display')
+  keysContainer.classList.toggle('display')
+})
 
  
 
@@ -98,7 +107,7 @@ const calculate = () => {
        else if (operator === '—') total -= Number(token)
        else if (operator === '*') total = total * Number(token)
        else if (operator ==='/') total = total / Number(token)
-       else if (operator ==='%') total = total * 1/100
+       else if (operator === '%') total = total * (Number(token) / 100)
       }
     }
   })
@@ -127,6 +136,38 @@ const displayHistory = () => {
       ` 
   })
 }
+
+//enter button is equivalent to equals to (=)
+window.addEventListener('keydown', (event) => {
+  event.preventDefault()
+  if (event.key === 'Enter' && calculatorArr.length > 0) {  
+    calculatorArr.push(inputElement.value)
+    if (!foundDuplicate) {
+      storageArr.push ({
+        date:today.toLocaleDateString(),
+        entries: [{expression: calculatorArr.join(' '), result: calculate(), time: today.toLocaleTimeString()}]
+      })
+      localStorage.setItem('previousCalc', JSON.stringify(storageArr))
+      displayHistory()
+    } 
+    else if (foundDuplicate) {
+      console.log(foundDuplicate)
+      foundDuplicate.entries.push({
+        expression: calculatorArr.join(' '),
+        result: calculate(),
+        time: today.toLocaleTimeString()
+      })
+      localStorage.setItem('previousCalc', JSON.stringify(storageArr))
+      displayHistory()
+    }
+
+    localStorage.setItem('previousCalc', JSON.stringify(storageArr))
+    inputElement.value = calculate()
+    temporaryResultdiv.textContent = ''
+    calculatorArr = []
+    return
+  }
+})
 
 displayHistory()
 
